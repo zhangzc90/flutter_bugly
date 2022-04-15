@@ -37,7 +37,8 @@ class FlutterBugly {
     int initDelay = 0, // 延迟初始化，单位秒
     int upgradeCheckPeriod = 0, //升级检查周期设置，单位秒
     int checkUpgradeCount = 1, // UpgradeInfo 为 null 时，再次 check 的次数，经测试 1 为最佳
-    bool customUpgrade = true, // 是否自定义升级，这里默认 true 为了兼容老版本
+    bool customUpgrade = true, // 是否自定义升级，这里默认 true 为了兼容老版本，
+    bool autoDownloadOn4g = false,
   }) async {
     assert(
       (Platform.isAndroid && androidAppId != null) ||
@@ -58,6 +59,7 @@ class FlutterBugly {
       "initDelay": initDelay,
       "upgradeCheckPeriod": upgradeCheckPeriod,
       "customUpgrade": customUpgrade,
+      "autoDownloadOn4g": autoDownloadOn4g
     };
     final dynamic result = await _channel.invokeMethod('initBugly', map);
     Map resultMap = json.decode(result);
